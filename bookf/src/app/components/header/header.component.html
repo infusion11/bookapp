@@ -1,0 +1,20 @@
+<header>
+    <div class="hcontainer">
+        <div class="hlogo">
+            <label>Anti-q</label>
+        </div>
+        <div class="respnav" (click)="showNav()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <nav class="navonclick" [class.navonclick]="respNavbar">
+            <ul>
+                <li (click)="showNav()" routerLink="">Home</li>
+                <li (click)="showNav()" routerLink="books">Books</li>
+                <li *ngIf="checkLiked()" (click)="showNav()" routerLink="my-books">My-Books</li>
+                <li *ngIf="isAdminurl()" (click)="Logout()">Logout</li>
+            </ul>
+        </nav>
+    </div>
+</header>

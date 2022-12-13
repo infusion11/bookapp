@@ -1,0 +1,29 @@
+.welcomeContainer {
+    text-align: center;
+    color:transparent;
+    background: linear-gradient(135deg,#9896f1,#e09ee8,#a393eb);
+    background-clip: text;
+}
+.welcomeContainer h1 {
+    font-size: 36px;
+    margin-top: 80px;
+    margin-right: 60px;
+}
+.welcomeContainer h2 {
+    font-size: 28px;
+    margin-top: 20px;
+    margin-left: 20px;
+}
+.welcomeContainer h3 {
+    font-size: 20px;
+    margin-top: 25px;
+    margin-left: 140px;
+}
+@media only screen and (max-width: 955px) {
+    .welcomeContainer h1,
+    .welcomeContainer h2,
+    .welcomeContainer h3 {
+        margin-left: 0px;
+        margin-right: 0px;
+    }
+}
