@@ -32,11 +32,6 @@ export class LoginComponent implements OnInit {
       next: (response) => {
         this.admintoken = response.admintoken;
         sessionStorage.setItem('admintoken', this.admintoken);
-        
-        const auth = JSON.parse(localStorage.getItem('Auth') || '[]');
-        auth.push(window.btoa(un));
-        auth.push(window.btoa(pw));
-        sessionStorage.setItem('Auth', JSON.stringify(auth));
         this.router.navigate(['admin']);},
       error: (error) => {
         this.loginForm.reset(),

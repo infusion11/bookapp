@@ -27,10 +27,9 @@ export class BookService {
     return this.http.get<Book>(`${this.restUrl}/bookapp/v1/getbook/${isbn}`)
   }
 
-  public addBook(book: Book, username: String, password: String): Observable<Book>{
+  public addBook(book: Book): Observable<Book>{
     const httpOptions = {
       headers: new HttpHeaders({
-        'Authorization': 'Basic ' + window.btoa(username+':'+password),
         'admintoken': ''+sessionStorage.getItem('admintoken')
       })
     };
@@ -40,29 +39,26 @@ export class BookService {
     }))
   }
 
-  public assignStore(bookISBN: Number, storeName: String, headers: String[]): Observable<any>{
+  public assignStore(bookISBN: Number, storeName: String): Observable<any>{
     const httpOptions = {
       headers: new HttpHeaders({
-        'Authorization': 'Basic ' + window.btoa(headers[0]+':'+headers[1]),
         'admintoken': ''+sessionStorage.getItem('admintoken')
       })
     };
     return this.http.post<any>(`${this.restUrl}/bookapp/v1/assignstore`, {bookISBN, storeName}, httpOptions)
   }
 
-  public deleteBook(isbn: Number, headers: String[]): Observable<any> {
+  public deleteBook(isbn: Number): Observable<any> {
     const httpOptions = {
       headers: new HttpHeaders({
-        'Authorization': 'Basic ' + window.btoa(headers[0]+':'+headers[1]),
         'admintoken': ''+sessionStorage.getItem('admintoken')
       })
     };
     return this.http.delete<any>(`${this.restUrl}/bookapp/v1/delete/${isbn}`, httpOptions)
   }
-  public uploadImage(file: FormData, headers: String[]): Observable<File> {
+  public uploadImage(file: FormData): Observable<File> {
     const httpOptions = {
       headers: new HttpHeaders({
-        'Authorization': 'Basic ' + window.btoa(headers[0]+':'+headers[1]),
         'admintoken': ''+sessionStorage.getItem('admintoken')
       })
     };

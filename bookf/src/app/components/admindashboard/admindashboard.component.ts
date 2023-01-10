@@ -11,12 +11,6 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 export class AdmindashboardComponent implements OnInit{
 
   book!: Book;
-  private auth = JSON.parse(sessionStorage.getItem('Auth') || '[]');
-  private uname = window.atob(this.auth[0]);
-  private pw = window.atob(this.auth[1]);
-  //private uname = environment.adminuser;
-  //private pw = environment.adminpw;
-  private uandp: String[] = [this.uname, this.pw];
   public books:  Book[] = [];
   img!: File;
 
@@ -24,12 +18,6 @@ export class AdmindashboardComponent implements OnInit{
 
   ngOnInit(): void {
     this.getBooks();
-    /*
-    this.bookService.Refresh.subscribe(
-      response => {
-      this.getBooks();
-    });
-    */
     
     this.bookService.Refresh.subscribe({
       next: (response) => this.getBooks(),
@@ -126,7 +114,7 @@ export class AdmindashboardComponent implements OnInit{
   }
 
   public uploadImage(image: FormData): void{
-    this.bookService.uploadImage(image, this.uandp)
+    this.bookService.uploadImage(image)
     .subscribe({
       next: (response) => console.log(response),
       error: (error) => console.log(error),
@@ -135,7 +123,7 @@ export class AdmindashboardComponent implements OnInit{
   }
 
   public assignStore(isbn: Number, store: String): void{
-    this.bookService.assignStore(isbn, store, this.uandp)
+    this.bookService.assignStore(isbn, store)
     .subscribe({
       next: (response) => console.log(response),
       error: (error) => {console.log(error),
@@ -145,7 +133,7 @@ export class AdmindashboardComponent implements OnInit{
   }
 
   public addBook(newbook: Book): void {
-      this.bookService.addBook(newbook, this.uname, this.pw)
+      this.bookService.addBook(newbook)
       .subscribe({
         next: (response) => console.log(response),
         error: (error) =>  console.log(error),
@@ -166,7 +154,7 @@ export class AdmindashboardComponent implements OnInit{
   }
 
   public delBook(book: Number): void {
-    this.bookService.deleteBook(book, this.uandp).subscribe({
+    this.bookService.deleteBook(book).subscribe({
       next: (response) => console.log(response),
       error: (error) => console.log(error),
       complete: () => console.log('Successful(deleteBook)')

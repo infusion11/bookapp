@@ -30,7 +30,6 @@ export class HeaderComponent implements OnInit {
 
   Logout(){
     sessionStorage.removeItem('admintoken');
-    sessionStorage.removeItem('Auth');
     this.router.navigate(['login']);
   }
 }
