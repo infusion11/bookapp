@@ -1,4 +1,4 @@
-IMPORTANT NOTE: This is an ongoing project, for which I used: Angular and Spring framework, MySQL. Since this is kind of a "presentation", I tried to use various techniques and resourceful ideas. Some of them would not fit in production environment, these are for the sake of simplicity and could be easily replaced.
+IMPORTANT NOTE: This is an ongoing project, for which I used: Angular and Spring framework, MySQL. Since this is kind of a "presentation", I tried to use various techniques and resourceful ideas. Some of them would not fit in production environment, these are for the sake of simplicity and could be easily replaced. The goal of this project was to demonstrate resourcefulness rather than to showcase the best practices.
 
 
 My application would be suitable for a book antiquary. The books are stored in the database. The user can see if the books are available in any of the antiquary's stores. There is an option to "like" a book, which saves the item for later, making it easy to keep track of its availability.

@@ -5,7 +5,7 @@ import com.showc.book.model.Book;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-@Service
+
 public interface BookService {
     Book addBook(Book book);
     List<Book> findAllBook();
