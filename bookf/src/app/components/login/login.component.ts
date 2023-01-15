@@ -10,7 +10,7 @@ import { LoginService } from 'src/app/services/login.service';
 })
 export class LoginComponent implements OnInit {
 
-  admintoken: any;
+  admintoken!: string;
 
   constructor(private loginService: LoginService, private router: Router) { }
 
