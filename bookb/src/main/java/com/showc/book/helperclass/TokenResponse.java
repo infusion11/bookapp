@@ -1,10 +1,11 @@
 package com.showc.book.helperclass;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 public class TokenResponse {
     private String admintoken;
-    private Date generatedAt;
+    private LocalDateTime generatedAt;
 
     public String getAdmintoken() {
         return admintoken;
@@ -14,11 +15,11 @@ public class TokenResponse {
         this.admintoken = admintoken;
     }
 
-    public Date getGeneratedAt() {
+    public LocalDateTime getGeneratedAt() {
         return generatedAt;
     }
 
-    public void setGeneratedAt(Date generatedAt) {
+    public void setGeneratedAt(LocalDateTime generatedAt) {
         this.generatedAt = generatedAt;
     }
 }
