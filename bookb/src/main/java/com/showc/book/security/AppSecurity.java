@@ -23,6 +23,10 @@ public class AppSecurity {
     private String adminusername;
     @Value("${spring.security.user.password}")
     private String adminpw;
+    @Value("${spring.security.user.username2}")
+    private String adminusername2;
+    @Value("${spring.security.user.password2}")
+    private String adminpw2;
     @Value("${spring.security.user.roles}")
     private String adminroles;
 
@@ -33,7 +37,8 @@ public class AppSecurity {
     @Bean
     protected UserDetailsService userDetailsService(){
         UserDetails admin = User.builder().username(adminusername).password(passwordEncoder().encode(adminpw)).roles(adminroles).build();
-        return new InMemoryUserDetailsManager(admin);
+        UserDetails admin2 = User.builder().username(adminusername2).password(passwordEncoder().encode(adminpw2)).roles(adminroles).build();
+        return new InMemoryUserDetailsManager(admin, admin2);
     }
 
     @Bean

@@ -16,13 +16,12 @@ public class TokenHandler {
         logs.put(token, date);
     }
 
-    //TODO: expiration date.
     public void isTokenExists(String token) {
         if(logs.get(token) == null){
             throw new RequestException("You need a valid token to access this endpoint.");
         }
         isTokenExpired(token);
-        System.out.println("Admin logged in. Token was created at: " + logs.get(token) + ".");
+        System.out.println("Admin db action with token: " + token + ". Token was created at: " + logs.get(token) + ".");
     }
 
     public void isTokenExpired(String token) {

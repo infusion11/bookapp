@@ -18,6 +18,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.security.Principal;
 import java.time.LocalDateTime;
 import java.util.Base64;
 import java.util.Date;
@@ -41,12 +42,13 @@ public class BookController {
     }
 
     @GetMapping("/login")
-    public ResponseEntity<TokenResponse> login(){
+    public ResponseEntity<TokenResponse> login(Principal principal){
         TokenResponse tokenResponse = new TokenResponse();
         String token = new String(Base64.getEncoder().encode(UUID.randomUUID().toString().getBytes()));
         tokenResponse.setAdmintoken(token);
         tokenResponse.setGeneratedAt(LocalDateTime.now());
         tokenHandler.saveToken(tokenResponse.getAdmintoken(),tokenResponse.getGeneratedAt());
+        System.out.println(principal.getName() + " generated a token: " + token);
         return new ResponseEntity<>(tokenResponse,HttpStatus.OK);
     }
 
