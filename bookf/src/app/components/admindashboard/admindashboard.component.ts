@@ -13,6 +13,7 @@ export class AdmindashboardComponent implements OnInit{
   book!: Book;
   public books:  Book[] = [];
   img!: File;
+  public isLoading: Boolean = true;
 
   constructor(private bookService: BookService) { }
 
@@ -149,7 +150,7 @@ export class AdmindashboardComponent implements OnInit{
           console.log(error)
         }
         console.log('Api is offline.')},
-      complete: () => console.log('Successful(getBooks)')
+      complete: () => {console.log('Successful(getBooks)'), this.isLoading = false}
     })
   }
 

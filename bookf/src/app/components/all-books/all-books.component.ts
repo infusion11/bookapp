@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 import { Book } from 'src/app/interface/book';
 import { BookService } from 'src/app/services/book.service';
 
@@ -10,6 +11,7 @@ import { BookService } from 'src/app/services/book.service';
 export class AllBooksComponent implements OnInit {
 
   public books:  Book[] = [];
+  public isLoading: Boolean = true;
 
   constructor(private bookService: BookService) { }
 
@@ -24,7 +26,7 @@ export class AllBooksComponent implements OnInit {
           console.log(error)
         }
         console.log('Api is offline.')},
-      complete: () => console.log('Successful',this.books)
+      complete: () => {console.log('Successful',this.books),this.isLoading = false}
     })
   }
   

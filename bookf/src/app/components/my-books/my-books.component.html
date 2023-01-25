@@ -1,19 +1,21 @@
-<div class="singlebook" *ngFor="let book of allbook">
-    <div class="sbtitle">{{book.title}}</div>
-    <div>ISBN: {{book.isbn}}</div>
-    <div>{{book.author}}</div>
-    <div *ngIf="book.image; else noImage">
-        <img class="bimage" src="assets/uploads/{{book.image}}" title="{{book.about}}">
-    </div>
-    <ng-template #noImage>
-        <div><img class="bimage" src="assets/teststock.png" title="{{book.about}}"></div>
-    </ng-template>
-    <div *ngIf="book.stores.length; else notAvailable">Elérhető: 
-        <div class="stnames" *ngFor="let sn of book.stores">
-            <a href="{{sn.website}}"> ({{sn.name}}) </a>
+<div class="try">
+    <div class="singlebook" *ngFor="let book of allbook">
+        <div class="sbtitle">{{book.title | titlecase}}</div>
+        <div>ISBN: {{book.isbn}}</div>
+        <div>{{book.author | titlecase}}</div>
+        <div *ngIf="book.image; else noImage">
+            <img class="bimage" src="assets/uploads/{{book.image}}" title="{{book.about}}">
         </div>
+        <ng-template #noImage>
+            <div><img class="bimage" src="assets/teststock.png" title="{{book.about}}"></div>
+        </ng-template>
+        <div *ngIf="book.stores.length; else notAvailable">Elérhető: 
+            <div class="stnames" *ngFor="let sn of book.stores">
+                <a href="{{sn.website}}"> ({{sn.name}}) </a>
+            </div>
+        </div>
+        <ng-template #notAvailable>
+            <div>Nem elérhető.</div>
+        </ng-template>
     </div>
-    <ng-template #notAvailable>
-        <div>Nem elérhető.</div>
-    </ng-template>
 </div>

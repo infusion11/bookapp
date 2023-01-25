@@ -4,6 +4,34 @@
     padding: 0;
     font-family: Georgia, 'Times New Roman', Times, serif;
 }
+.loader {
+    height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 45px;
+    animation: fade 2s ease-in-out infinite;
+}
+@keyframes fade {
+0% {
+    opacity: 1;
+}
+25% {
+    opacity: 0.1;
+    font-size: 30px;
+}
+50% {
+    font-size: 20px;
+}
+75% {
+    opacity: 0.1;
+    font-size: 30px;
+}
+100% {
+    opacity: 1;
+    font-size: 45px;
+}
+}
 body {
     background-color: #f3f1f8;
 }
@@ -25,6 +53,11 @@ a {
     color: #9896f1;
     text-decoration: none;
 }
+.try {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(33%, 400px), 1fr));
+    gap: 1rem;
+}
 .singlebook {
     margin-top: 12px;
     margin-bottom: 6px;
@@ -34,9 +67,7 @@ a {
     padding-bottom: 5px;
     display: inline-block;
     text-align: center;
-    min-width: 25%;
     min-height: fit-content;
-    width: 33%;
     box-shadow: 3px 3px 8px;
 }
 .sbtitle{

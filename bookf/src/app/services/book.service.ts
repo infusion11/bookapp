@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, Subject, tap } from 'rxjs';
+import { delay, Observable, Subject, tap} from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Book } from '../interface/book';
 import { environment } from 'src/environments/environment';
@@ -20,7 +20,7 @@ export class BookService {
   }
 
   public getAllBook(): Observable<Book[]> {
-    return this.http.get<Book[]>(`${this.restUrl}/bookapp/v1/getallbook`)
+    return this.http.get<Book[]>(`${this.restUrl}/bookapp/v1/getallbook`).pipe(delay(2000))
   }
 
   public getBook(isbn: number): Observable<Book> {
