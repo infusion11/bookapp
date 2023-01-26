@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Book } from 'src/app/interface/book';
 import { BookService } from 'src/app/services/book.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-admindashboard',
@@ -14,20 +15,20 @@ export class AdmindashboardComponent implements OnInit{
   public books:  Book[] = [];
   img!: File;
   public isLoading: Boolean = true;
+  public books$!: Observable<Book[]>;
 
   constructor(private bookService: BookService) { }
 
   ngOnInit(): void {
-    this.getBooks();
+    this.books$ = this.bookService.getAllBook();
     
     this.bookService.Refresh.subscribe({
-      next: (response) => this.getBooks(),
+      next: (response) => this.books$ = this.bookService.getAllBook(),
       error: (error) => {
         if(error.status !== 0){
           console.log(error)
         }
-        console.log('Api is offline.')},
-      complete: () => console.log('Success(update)')
+        console.log('Api is offline.')}
     });
   }
 
@@ -140,18 +141,6 @@ export class AdmindashboardComponent implements OnInit{
         error: (error) =>  console.log(error),
         complete: () => console.log('Successful(addBook)')
       })
-  }
-
-  public getBooks(): void {
-    this.bookService.getAllBook().subscribe({
-      next: (response) => this.books = response,
-      error: (error) =>{
-        if(error.status !== 0){
-          console.log(error)
-        }
-        console.log('Api is offline.')},
-      complete: () => {console.log('Successful(getBooks)'), this.isLoading = false}
-    })
   }
 
   public delBook(book: Number): void {

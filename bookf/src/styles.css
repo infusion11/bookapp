@@ -53,7 +53,7 @@ a {
     color: #9896f1;
     text-decoration: none;
 }
-.try {
+.bookgrid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(min(33%, 400px), 1fr));
     gap: 1rem;

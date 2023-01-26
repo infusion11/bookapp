@@ -55,6 +55,9 @@ export class BookService {
       })
     };
     return this.http.delete<any>(`${this.restUrl}/bookapp/v1/delete/${isbn}`, httpOptions)
+    .pipe(tap(() => {
+      this.Refresh.next();
+    }))
   }
   public uploadImage(file: FormData): Observable<File> {
     const httpOptions = {

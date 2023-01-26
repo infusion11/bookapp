@@ -1,4 +1,4 @@
-<div class="try">
+<div class="bookgrid" *ngIf="books$ | async as books; else loader">
     <div class="singlebook" *ngFor="let book of books">
         <div class="sbtitle">{{book.title | titlecase}}</div>
         <div>ISBN: {{book.isbn}}</div>
@@ -20,6 +20,8 @@
         </ng-template>
     </div>
 </div>
-<div *ngIf="isLoading" class="loader">
+<ng-template #loader>
+    <div class="loader">
         <p>Loading...</p>
-</div>
+    </div>
+</ng-template>

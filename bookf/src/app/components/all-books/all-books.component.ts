@@ -10,24 +10,12 @@ import { BookService } from 'src/app/services/book.service';
 })
 export class AllBooksComponent implements OnInit {
 
-  public books:  Book[] = [];
-  public isLoading: Boolean = true;
+  public books$!: Observable<Book[]>;
 
   constructor(private bookService: BookService) { }
 
   ngOnInit(): void {
-    this.getBooks();
-  }
-  public getBooks(): void {
-    this.bookService.getAllBook().subscribe({
-      next: (response) => this.books = response,
-      error: (error) => {
-        if(error.status !== 0){
-          console.log(error)
-        }
-        console.log('Api is offline.')},
-      complete: () => {console.log('Successful',this.books),this.isLoading = false}
-    })
+    this.books$ = this.bookService.getAllBook();
   }
   
   like(isbn: number) {

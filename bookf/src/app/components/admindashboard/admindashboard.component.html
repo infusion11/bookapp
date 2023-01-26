@@ -1,7 +1,4 @@
-<div *ngIf="isLoading" class="loader">
-    <p>Fetching data...</p>
-</div>
-<div *ngIf="!isLoading">
+<div *ngIf="books$ | async as books; else loader">
     <div class="addBookForm">
         <div class="form-container">
             <h2>Add a book</h2>
@@ -78,3 +75,8 @@
         </div>
     </div>
 </div>
+<ng-template #loader>
+    <div class="loader">
+        <p>Fetching data...</p>
+    </div>
+</ng-template>
