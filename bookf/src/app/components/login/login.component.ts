@@ -36,7 +36,8 @@ export class LoginComponent implements OnInit {
       error: (error) => {
         this.loginForm.reset(),
         console.log(error),
-        console.log('Failed attempt.')
+        console.log('Failed attempt.'),
+        alert("Failed login attempt.")
       },
       complete: () => console.log('Successful(login)')
     })

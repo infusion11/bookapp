@@ -42,13 +42,12 @@ public class BookController {
     }
 
     @GetMapping("/login")
-    public ResponseEntity<TokenResponse> login(Principal principal){
+    public ResponseEntity<TokenResponse> login(){
         TokenResponse tokenResponse = new TokenResponse();
         String token = new String(Base64.getEncoder().encode(UUID.randomUUID().toString().getBytes()));
         tokenResponse.setAdmintoken(token);
         tokenResponse.setGeneratedAt(LocalDateTime.now());
         tokenHandler.saveToken(tokenResponse.getAdmintoken(),tokenResponse.getGeneratedAt());
-        System.out.println(principal.getName() + " generated a token: " + token);
         return new ResponseEntity<>(tokenResponse,HttpStatus.OK);
     }
 

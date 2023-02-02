@@ -130,7 +130,9 @@ export class AdmindashboardComponent implements OnInit{
       next: (response) => console.log(response),
       error: (error) => {console.log(error),
         console.log(error.error.message)},
-      complete: () => console.log('Successful(store)')
+      complete: () => {
+        console.log('Successful(store)'),
+        alert("Store successfully assigned.")}
     })
   }
 
@@ -139,7 +141,9 @@ export class AdmindashboardComponent implements OnInit{
       .subscribe({
         next: (response) => console.log(response),
         error: (error) =>  console.log(error),
-        complete: () => console.log('Successful(addBook)')
+        complete: () => {
+          console.log('Successful(addBook)'),
+          alert("Book successfully added.")}
       })
   }
 
@@ -147,7 +151,9 @@ export class AdmindashboardComponent implements OnInit{
     this.bookService.deleteBook(book).subscribe({
       next: (response) => console.log(response),
       error: (error) => console.log(error),
-      complete: () => console.log('Successful(deleteBook)')
+      complete: () => {
+        console.log('Successful(deleteBook)'),
+        alert("Book with "+ book +" isbn deleted.")}
     })
   }
   
