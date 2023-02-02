@@ -56,7 +56,7 @@ public class AppSecurity {
         httpSecurity
                 .cors().and().csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/bookapp/v1/getallbook",
+                .requestMatchers("/bookapp/v1/getallbook",
                         "/bookapp/v1/getbook/**",
                         "/bookapp/v1/addbook",
                         "/bookapp/v1/updatebook",

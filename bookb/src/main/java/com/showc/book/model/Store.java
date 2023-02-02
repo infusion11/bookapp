@@ -1,6 +1,6 @@
 package com.showc.book.model;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 
 @Entity
 public class Store {

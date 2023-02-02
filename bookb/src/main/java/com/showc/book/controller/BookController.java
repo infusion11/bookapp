@@ -7,21 +7,19 @@ import com.showc.book.helperclass.TokenResponse;
 import com.showc.book.model.Book;
 import com.showc.book.security.TokenHandler;
 import com.showc.book.service.BookServiceImp;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.validation.Valid;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.security.Principal;
 import java.time.LocalDateTime;
 import java.util.Base64;
-import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
