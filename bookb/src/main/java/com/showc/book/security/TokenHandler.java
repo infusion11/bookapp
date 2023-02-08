@@ -5,30 +5,33 @@ import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 @Component
 public class TokenHandler {
-    private final HashMap<String, LocalDateTime> logs = new HashMap<>();
+    private final HashMap<String, HashMap<String, LocalDateTime>> logs = new HashMap<>();
 
-    public void saveToken(String token, LocalDateTime date) {
-        logs.put(token, date);
+    public void saveToken(String token, String adminName, LocalDateTime date) {
+        HashMap<String, LocalDateTime> nameAndDate = new HashMap<>();
+        nameAndDate.put(adminName, date);
+        logs.put(token, nameAndDate);
+        System.out.println(logs);
     }
 
-    public boolean isTokenExists(String token) {
+    public String isTokenExists(String token) {
         if(logs.get(token) == null){
             throw new RequestException("You need a valid token to access this endpoint.");
         }
         isTokenExpired(token);
         System.out.println("Admin db action with token: " + token + ". Token was created at: " + logs.get(token) + ".");
-        return true;
+        List<String> str= logs.get(token).keySet().stream().toList();
+        return str.get(0);
     }
 
     public void isTokenExpired(String token) {
-        LocalDateTime generatedAt = logs.get(token);
+        HashMap<String, LocalDateTime> map = logs.get(token);
+        List<LocalDateTime> unformattedGenAt = map.values().stream().toList();
+        LocalDateTime generatedAt = unformattedGenAt.get(0);
         LocalDateTime now = LocalDateTime.now();
         if(generatedAt.plusDays(7).isBefore(now)) {
             logs.remove(token);

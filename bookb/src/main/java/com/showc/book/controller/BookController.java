@@ -18,6 +18,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.security.Principal;
 import java.time.LocalDateTime;
 import java.util.Base64;
 import java.util.List;
@@ -40,12 +41,12 @@ public class BookController {
     }
 
     @GetMapping("/login")
-    public ResponseEntity<TokenResponse> login(){
+    public ResponseEntity<TokenResponse> login(Principal principal){
         TokenResponse tokenResponse = new TokenResponse();
         String token = new String(Base64.getEncoder().encode(UUID.randomUUID().toString().getBytes()));
         tokenResponse.setAdmintoken(token);
         tokenResponse.setGeneratedAt(LocalDateTime.now());
-        tokenHandler.saveToken(tokenResponse.getAdmintoken(),tokenResponse.getGeneratedAt());
+        tokenHandler.saveToken(tokenResponse.getAdmintoken(), principal.getName(), tokenResponse.getGeneratedAt());
         return new ResponseEntity<>(tokenResponse,HttpStatus.OK);
     }
 
@@ -62,7 +63,6 @@ public class BookController {
     @PostMapping("/addbook")
     public ResponseEntity<Book> addBook(@RequestHeader("admintoken") String token,
                                         @Valid @RequestBody Book book){
-        tokenHandler.isTokenExists(token);
         Book newbook = bookServiceImp.addBook(book);
         return new ResponseEntity<>(newbook, HttpStatus.CREATED);
     }
@@ -70,14 +70,12 @@ public class BookController {
     @PutMapping("/updatebook")
     public ResponseEntity<Book> updateBook(@RequestHeader("admintoken") String token,
                                            @Valid @RequestBody Book book){
-        tokenHandler.isTokenExists(token);
         Book updated = bookServiceImp.updateBook(book);
         return new ResponseEntity<>(updated, HttpStatus.CREATED);
     }
     @DeleteMapping("/delete/{isbn}")
     public ResponseEntity<MessageResponse> deleteABookByIsbn(@RequestHeader("admintoken") String token,
                                                              @PathVariable("isbn") String isbn){
-        tokenHandler.isTokenExists(token);
         String img = bookServiceImp.findBook(isbn).getImage();
         bookServiceImp.deleteBook(isbn);
         MessageResponse messageResponse = new MessageResponse();
@@ -91,7 +89,6 @@ public class BookController {
     @PostMapping("/assignstore")
     public ResponseEntity<MessageResponse> assignStore(@RequestHeader("admintoken") String token,
                                                        @RequestBody AssignStore form){
-        tokenHandler.isTokenExists(token);
         bookServiceImp.assignStore(form.getBookISBN(), form.getStoreName());
         MessageResponse messageResponse = new MessageResponse();
         messageResponse.setMessage("A store("+form.getStoreName()+") to a book("+form.getBookISBN()+") successfully added.");
@@ -100,7 +97,6 @@ public class BookController {
     @PostMapping("/uploadimage")
     public ResponseEntity<MessageResponse> uploadImage(@RequestHeader("admintoken") String token,
                                                        @RequestParam("file") MultipartFile multipartFile){
-        tokenHandler.isTokenExists(token);
         if(!multipartFile.isEmpty()){
             try{
                 byte[] bytes = multipartFile.getBytes();
